@@ -26,6 +26,12 @@
 
 const mongoose = require("mongoose");
 
+// ================ import all models here ================
+const User = require("./user.model");
+const Shop = require("./shop.model");
+const Plan = require("./plan.model");
+const Bill = require("./bill.model");
+
 mongoose.Promise = global.Promise;
 
 const db = {};
