@@ -56,20 +56,27 @@ const morgan = require("morgan");
 const httpError = require("http-errors");
 const db = require("./models"); // Import models
 
-const app = express();
+//===== import routes =====================|
+const { authRouter } = require("./routes");
 
+//=========================================|
+const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
+//====== url ===============================|
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello, welcome to the API!" });
 });
+
+app.use("/api/auth", authRouter);
+
+//==========================================|
 
 // Error handler
 app.use(async (req, res, next) => {
   next(httpError.NotFound());
 });
-
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.send({

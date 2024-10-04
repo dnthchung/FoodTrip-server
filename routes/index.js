@@ -1,5 +1,4 @@
-// const cakeRouter = require("./cakeRoute");
-
+const authRouter = require("./authRoute");
 module.exports = {
-  // cakeRouter,
+  authRouter,
 };
