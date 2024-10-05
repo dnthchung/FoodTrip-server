@@ -7,7 +7,7 @@ const User = db.user;
 const bcrypt = require("bcrypt");
 
 //sign up
-async function signUp(req, res, next) {
+async function register(req, res, next) {
   try {
     if (req.body) {
       const salt = await bcrypt.genSalt(10);
@@ -79,7 +79,7 @@ async function login(req, res, next) {
 const authRouter = express.Router();
 authRouter.use(bodyParser.json());
 
-authRouter.post("/signup", signUp);
+authRouter.post("/register", register);
 authRouter.post("/login", login);
 
 module.exports = authRouter;

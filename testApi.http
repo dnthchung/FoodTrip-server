@@ -1,0 +1,29 @@
+### Test the API root endpoint
+GET http://localhost:9999/api/hello
+Content-Type: application/json
+
+###
+
+### Register - User
+POST http://localhost:9999/api/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "Doan Chung",
+    "password": "123",
+    "email": "doanchung@gmail.com"
+}
+
+###
+
+### Login 
+POST http://localhost:9999/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "doanchung@gmail.com",
+    "password": "123"
+}
+
+###
+
