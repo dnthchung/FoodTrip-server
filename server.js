@@ -26,7 +26,14 @@ const app = express();
 // ===== Production =====
 app.use(
   cors({
-    origin: ["https://www.foodtripvn.site", "http://localhost:5173", "https://food-trip-client-6ia9ctudu-chung-doans-projects.vercel.app"], // Replace with your front-end URL
+    origin: [
+      "https://www.foodtripvn.site",
+      "http://localhost:5173",
+      "https://food-trip-client-6ia9ctudu-chung-doans-projects.vercel.app",
+      "https://food-trip-client.vercel.app/",
+      "https://food-trip-client.vercel.app",
+      "https://www.foodtripvn.site/",
+    ], // Replace with your front-end URL
     credentials: true, // Allow cookies and authentication headers to be sent with requests
   }),
 );
