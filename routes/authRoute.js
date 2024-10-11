@@ -41,8 +41,9 @@ async function login(req, res, next) {
     });
 
     if (!userFound) {
-      return res.status(404).json({
-        message: "User not found",
+      return res.status(400).json({
+        status: 400,
+        message: "Tài khoản chưa đăng ký !!",
       });
     }
 
@@ -75,11 +76,24 @@ async function login(req, res, next) {
   }
 }
 
+//logout
+async function logout(req, res, next) {
+  try {
+    req.session.destroy();
+    res.status(200).json({
+      message: "Logout successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 // ========== / routes /==========
 const authRouter = express.Router();
 authRouter.use(bodyParser.json());
 
 authRouter.post("/register", register);
 authRouter.post("/login", login);
+authRouter.post("/logout", logout);
 
 module.exports = authRouter;

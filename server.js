@@ -1,97 +1,64 @@
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const morgan = require("morgan");
-// const httpError = require("http-errors");
-// const db = require("./models");
-// ////=============================1. Phải import routes===================
-// // const { cakeRouter, toppingRouter, optionRouter } = require("./routes");
-
-// //============================================================================
-
-// require("dotenv").config();
-
-// const app = express();
-// app.use(morgan("dev"));
-// app.use(bodyParser.json());
-// // error handle
-// app.use(async (req, res, next) => {
-//   next(httpError.NotFound());
-// });
-// app.use((error, req, res, next) => {
-//   res.status(error.status || 500);
-//   res.send({
-//     error: {
-//       status: error.status || 500,
-//       message: error.message,
-//     },
-//   });
-// });
-
-// //====================2. để ý là mẫu họ đòi URL trông ntn ==================
-// // app.use("/cake", cakeRouter);
-// // app.use("/topping", toppingRouter);
-// // app.use("/option", optionRouter);
-
-// // app.use("/api/movie", movieRouter);
-// //============================================================================
-
-// // ======================= local connection =======================
-// // app.listen(process.env.PORT, process.env.HOST_NAME, () => {
-// //   console.log(
-// //     `Server is running on port ${process.env.PORT} and at : https://${process.env.HOST_NAME}:${process.env.PORT}`,
-// //   );
-// //   db.connectDB();
-// // });
-
-// // ======================= Mongo atlas connection =======================
-// app.listen(process.env.MONGO_URI, () => {
-//   // db.connectDB();
-//   console.log("Server is running on port " + process.env.MONGO_URI);
-// });
-
+// Load environment variables from .env file
 require("dotenv").config();
+
+// Import required modules
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require("cors");
 const httpError = require("http-errors");
-const db = require("./models"); // Import models
+const db = require("./models"); // MongoDB models
 
-//===== import routes =====================|
+// Import routes
 const { authRouter } = require("./routes");
 
-//=========================================|
+// Initialize Express app
 const app = express();
-app.use(morgan("dev"));
-app.use(bodyParser.json());
 
-//====== url ===============================|
+// ===== CORS Configuration =====
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with your front-end URL
+    credentials: true, // Allow cookies and authentication headers to be sent with requests
+  }),
+);
+
+// ===== Middleware Setup =====
+app.use(morgan("dev")); // Logger for HTTP requests
+app.use(bodyParser.json({ limit: "50mb" })); // Parse JSON request bodies
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" })); // Parse URL-encoded request bodies
+
+// ===== API Routes =====
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello, welcome to the API!" });
 });
 
-app.use("/api/auth", authRouter);
+app.use("/api/auth", authRouter); // Authentication routes
 
-//==========================================|
-
-// Error handler
-app.use(async (req, res, next) => {
-  next(httpError.NotFound());
+// ===== Error Handling =====
+app.use((req, res, next) => {
+  next(httpError(404, "Resource Not Found")); // Handle 404 errors for unknown routes
 });
+
 app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.send({
+  res.status(error.status || 500).json({
     error: {
       status: error.status || 500,
-      message: error.message,
+      message: error.message || "Internal Server Error",
     },
   });
 });
 
-// MongoDB Connection
-db.connectDB(); // Connect to MongoDB
-
-// Listen on a valid port, not the MongoDB URI
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// ===== MongoDB Connection and Server Initialization =====
+db.connectDB()
+  .then(() => {
+    console.log("Connected to MongoDB successfully");
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to connect to MongoDB:", error);
+    process.exit(1); // Exit the application if the database connection fails
+  });
