@@ -16,9 +16,17 @@ const { authRouter } = require("./routes");
 const app = express();
 
 // ===== CORS Configuration =====
+// ===== Staging =====
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173", // Replace with your front-end URL
+//     credentials: true, // Allow cookies and authentication headers to be sent with requests
+//   }),
+// );
+// ===== Production =====
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your front-end URL
+    origin: "https://www.foodtripvn.site/", // Replace with your front-end URL
     credentials: true, // Allow cookies and authentication headers to be sent with requests
   }),
 );
