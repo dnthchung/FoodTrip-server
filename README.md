@@ -104,8 +104,6 @@ Dưới đây là các mã trạng thái HTTP thông dụng được sử dụng
 
 ---
 
-Nếu có bất kỳ câu hỏi hay lỗi phát sinh trong quá trình deploy, vui lòng liên hệ với đội ngũ phát triển.
-
 ### Giải Thích Chi Tiết:
 
 1. **Phần thay đổi domain**: Hướng dẫn rõ ràng về việc sử dụng domain phù hợp cho môi trường local và production.
