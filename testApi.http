@@ -16,6 +16,18 @@ Content-Type: application/json
 
 ###
 
+### Register - Admin
+POST http://localhost:9999/api/auth/createAdmin
+Content-Type: application/json
+
+{
+    "fullName": "Admin 1",
+    "password": "123",
+    "email": "admin@gmail.com"
+}
+
+###
+
 ### Login 
 POST http://localhost:9999/api/auth/login
 Content-Type: application/json
