@@ -51,7 +51,7 @@ async function login(req, res, next) {
     const validPassword = await bcrypt.compare(password, userFound.password);
     if (!validPassword) {
       return res.status(400).json({
-        message: "Wrong password!!",
+        message: "Mật khẩu không chính xác!!",
       });
     }
 
