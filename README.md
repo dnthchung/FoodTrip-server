@@ -1,26 +1,6 @@
 # Hướng Dẫn Deploy và Code giữa BE và FE
 
-## 1. Thay đổi Domain khi Code Local và Khi Deploy
-
-- **Khi code ở local**:  
-  Mở file `index.js` trong thư mục `api` và **đổi domain** như sau:
-
-  ```javascript
-  const domain = "http://localhost:9999/api";
-  ```
-
-- **Khi commit và deploy lên server**:  
-  Trước khi commit, **đổi lại domain** về:
-
-  ```javascript
-  const domain = "https://foodtrip-server.onrender.com/api";
-  ```
-
-- **Các đầu API**: Các API được định nghĩa trong thư mục `api` để tiện quản lý và deploy.
-
----
-
-## 2. Quy tắc trả về dữ liệu trong API từ BE
+## 1. Quy tắc trả về dữ liệu trong API từ BE
 
 Khi xây dựng API từ phía **Backend**, API cần **trả về dữ liệu với cấu trúc chuẩn** dưới đây, bất kể request thành công hay lỗi:
 
@@ -56,7 +36,7 @@ Khi xây dựng API từ phía **Backend**, API cần **trả về dữ liệu v
 
 ---
 
-## 3. Danh Sách Các Status Code Có Thể Trả Về
+## 2. Danh Sách Các Status Code Có Thể Trả Về
 
 Dưới đây là các mã trạng thái HTTP thông dụng được sử dụng trong quá trình phát triển API:
 
@@ -88,14 +68,14 @@ Dưới đây là các mã trạng thái HTTP thông dụng được sử dụng
 
 ---
 
-## 4. Quy định về cấu trúc code BE
+## 3. Quy định về cấu trúc code BE
 
 - **Tất cả code logic** phải được đặt **bên trong thư mục `Route`**.
 - **Không được viết code logic ra ngoài** thư mục này để đảm bảo tổ chức code rõ ràng và dễ quản lý.
 
 ---
 
-## 5. Lưu ý khi Deploy
+## 4. Lưu ý khi Deploy
 
 - **Kiểm tra domain** trong `index.js` trước khi commit và deploy:
   - Ở local: `http://localhost:9999/api`
