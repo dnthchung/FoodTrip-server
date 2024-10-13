@@ -39,3 +39,7 @@ Content-Type: application/json
 
 ###
 
+### ==================== Shop ====================
+
+### get all
+GET http://localhost:9999/api/shop
