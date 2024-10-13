@@ -32,7 +32,7 @@ db.connectDB = async () => {
     console.log(`Successfully connected to MongoDB: ${process.env.DB_NAME}`);
   } catch (err) {
     console.error("Error connecting to MongoDB:", err.message);
-    process.exit(1); // Terminate the app on database connection error
+    process.exit(1);
   }
 };
 
