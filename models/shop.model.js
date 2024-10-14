@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 // Address Schema
 const addressSchema = new mongoose.Schema({
+  ward: { type: String, required: false },
   district: { type: String },
   province: { type: String },
-  city: { type: String, required: true },
   specificAddress: { type: String, required: true },
 });
 
