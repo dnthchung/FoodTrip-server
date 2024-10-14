@@ -24,9 +24,7 @@ db.connectDB = async () => {
     const mongoURI = process.env.USE_ATLAS === "true" ? process.env.MONGO_URI : process.env.MONGO_LOCAL_URL;
 
     await mongoose.connect(mongoURI, {
-      dbName: process.env.DB_NAME,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      dbName: process.env.DB_NAME, // Set the database name
     });
 
     console.log(`Successfully connected to MongoDB: ${process.env.DB_NAME}`);
