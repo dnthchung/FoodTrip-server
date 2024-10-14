@@ -11,7 +11,7 @@ const addressSchema = new mongoose.Schema({
 // Social Links Schema
 const socialSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  link: { type: String, required: true },
+  link: { type: String, required: false },
 });
 
 // Review Detail Schema
