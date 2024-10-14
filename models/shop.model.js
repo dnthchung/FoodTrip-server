@@ -46,8 +46,6 @@ const menuSchema = new mongoose.Schema({
     enum: ["đ", "$"],
     required: true,
   },
-  rating: { type: Number, min: 1, max: 5 },
-  reviews: { type: [reviewSchema], default: [] },
 });
 
 // Shop Schema
@@ -65,12 +63,13 @@ const shopSchema = new mongoose.Schema(
       required: true,
       match: [/^\d{10,15}$/, "Please provide a valid phone number"],
     },
-    priceRange: { type: String, required: true },
+    minPrice: { type: Number, required: true },
+    maxPrice: { type: Number, required: true },
     social: { type: [socialSchema], default: [] },
     address: { type: [addressSchema], default: [] },
     menu: { type: [menuSchema], default: [] },
+    reviews: reviewSchema,
     rating: { type: Number, min: 1, max: 5 },
-    reviews: { type: Number, default: 0 },
   },
   { timestamps: true },
 );
