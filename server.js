@@ -8,18 +8,11 @@ const cors = require("cors");
 const httpError = require("http-errors");
 const db = require("./models"); // MongoDB models
 // Import routes
-const { authRouter } = require("./routes");
+const { authRouter, shopRouter } = require("./routes");
 // Initialize Express app
 const app = express();
+
 // ===== CORS Configuration =====
-// ===== Staging =====
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173", // Replace with your front-end URL
-//     credentials: true, // Allow cookies and authentication headers to be sent with requests
-//   }),
-// );
-// ===== Production =====
 app.use(
   cors({
     origin: [
@@ -29,19 +22,23 @@ app.use(
       "https://food-trip-client.vercel.app/",
       "https://food-trip-client.vercel.app",
       "https://www.foodtripvn.site/",
-    ], // Replace with your front-end URL
+    ],
     credentials: true, // Allow cookies and authentication headers to be sent with requests
   }),
 );
+
 // ===== Middleware Setup =====
-app.use(morgan("dev")); // Logger for HTTP requests
-app.use(bodyParser.json({ limit: "50mb" })); // Parse JSON request bodies
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" })); // Parse URL-encoded request bodies
+app.use(morgan("dev"));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+
 // ===== API Routes =====
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello, welcome to the API!" });
 });
-app.use("/api/auth", authRouter); // Authentication routes
+app.use("/api/auth", authRouter);
+app.use("/api/shop", shopRouter);
+
 // ===== Error Handling =====
 app.use((req, res, next) => {
   next(httpError(404, "Resource Not Found")); // Handle 404 errors for unknown routes
