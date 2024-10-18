@@ -126,6 +126,19 @@ async function createAdmin(req, res, next) {
   }
 }
 
+//get all user list
+async function getAllUser(req, res, next) {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      message: "Get all user successfully",
+      data: users,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 // ========== / routes /==========
 const authRouter = express.Router();
 authRouter.use(bodyParser.json());
@@ -134,5 +147,6 @@ authRouter.post("/register", register);
 authRouter.post("/login", login);
 authRouter.post("/logout", logout);
 authRouter.post("/createAdmin", createAdmin);
+authRouter.get("/getAllUsers", getAllUser);
 
 module.exports = authRouter;
