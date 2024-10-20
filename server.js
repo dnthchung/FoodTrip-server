@@ -8,7 +8,7 @@ const cors = require("cors");
 const httpError = require("http-errors");
 const db = require("./models"); // MongoDB models
 // Import routes
-const { authRouter, shopRouter } = require("./routes");
+const { authRouter, shopRouter, orderRouter } = require("./routes");
 // Initialize Express app
 const app = express();
 
@@ -38,7 +38,7 @@ app.get("/api/hello", (req, res) => {
 });
 app.use("/api/auth", authRouter);
 app.use("/api/shop", shopRouter);
-
+app.use("/api/bill", orderRouter)
 // ===== Error Handling =====
 app.use((req, res, next) => {
   next(httpError(404, "Resource Not Found")); // Handle 404 errors for unknown routes
