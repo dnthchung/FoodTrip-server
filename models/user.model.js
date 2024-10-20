@@ -36,12 +36,20 @@ const userSchema = new mongoose.Schema(
         ref: "Shop",
       },
     ],
-    bill: [
+    order: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Bill",
+        ref: "Order",
       },
     ],
+    isPremium: {
+      type: Boolean,
+      default: false, // Default value if not specified
+    },
+    expirationDate: {
+      type: Date, // Use Date for timestamp
+      required: false, // Optional field
+    },
   },
   {
     timestamps: true,
