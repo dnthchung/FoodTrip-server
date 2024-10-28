@@ -126,12 +126,12 @@ async function createAdmin(req, res, next) {
   }
 }
 
-//get all user list
+// Get all user list without password
 async function getAllUser(req, res, next) {
   try {
-    const users = await User.find();
+    const users = await User.find({}, "-password"); // Exclude password field
     res.status(200).json({
-      message: "Get all user successfully",
+      message: "Get all users successfully",
       data: users,
     });
   } catch (err) {

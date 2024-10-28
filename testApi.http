@@ -37,7 +37,8 @@ Content-Type: application/json
     "password": "123"
 }
 
-###
+### get all user
+GET http://localhost:9999/api/auth/getAllUsers
 
 ### ==================== Shop ====================
 
@@ -47,3 +48,5 @@ GET http://localhost:9999/api/shop
 
 ### get all shop
 GET https://foodtrip-server.onrender.com/api/shop
+
+
